@@ -35,7 +35,8 @@ Options:
   // See `Available Private Streams` below.
   apiKeyID: '',
   apiKeySecret: '',
-  maxTableLen: 10000  // the maximum number of table elements to keep in memory (FIFO queue)
+  maxTableLen: 10000,  // the maximum number of table elements to keep in memory (FIFO queue)
+  wsOptions: {} // websocket client's options, see https://github.com/websockets/ws/blob/master/doc/ws.md#new-websocketaddress-protocols-options
 }
 ```
 
