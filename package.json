@@ -1,6 +1,6 @@
 {
   "name": "bitmex-realtime-api",
-  "version": "0.4.0",
+  "version": "0.4.3",
   "description": "A library for interacting with BitMEX's websocket API.",
   "main": "index.js",
   "repository": "https://github.com/BitMEX/api-connectors.git",
@@ -20,10 +20,10 @@
   "author": "Samuel Reed <samuel.trace.reed@gmail.com> (http://strml.net/)",
   "license": "MIT",
   "dependencies": {
-    "debug": "^3.1.0",
+    "debug": "^4.1.1",
     "eventemitter2": "^5.0.1",
     "lodash": "^4.17.10",
-    "superagent": "^3.8.3",
-    "ws": "^6.0.0"
+    "superagent": "^5.1.0",
+    "ws": "^7.2.0"
   }
 }

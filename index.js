@@ -87,6 +87,7 @@ BitMEXClient.prototype.getData = function(symbol, tableName) {
   else if (symbol && !tableName) {
     out = Object.keys(this._data).reduce((memo, tableKey) => {
       memo[tableKey] = this._data[tableKey][symbol] || [];
+      return memo;
     }, {});
   }
   // All table data
@@ -95,7 +96,7 @@ BitMEXClient.prototype.getData = function(symbol, tableName) {
   } else {
     throw new Error('Pass a symbol, tableName, or both to getData([symbol], [tableName]) - but one must be provided.');
   }
-  return clone(out);
+  return _.cloneDeep(out);
 };
 
 /**
@@ -118,7 +119,7 @@ BitMEXClient.prototype.getSymbol = function(symbol) {
  *
  * To catch errors, attach an 'error' listener to the client itself.
  *
- * If no tableName is passed, will subscribe to all public tables.
+ * If a tableName of '*' is passed, it will subscribe to all public tables.
  *
  * @param {String}   symbol    Symbol to subscribe to.
  * @param {String}   [tableName] Table to subscribe to. See README.
@@ -170,7 +171,7 @@ BitMEXClient.prototype.subscriptionCount = function(table, symbol) {
 };
 
 BitMEXClient.prototype.sendSubscribeRequest = function(table, symbol) {
-  console.log(JSON.stringify({op: 'subscribe', args: `${table}:${symbol}`}))
+  debug(JSON.stringify({op: 'subscribe', args: `${table}:${symbol}`}))
   this.socket.send(JSON.stringify({op: 'subscribe', args: `${table}:${symbol}`}));
 };
 
@@ -225,10 +226,6 @@ function addStreamHelper(client, symbol, tableName, callback) {
       if (client.socket.opened) openSubscription();
     }
   });
-}
-
-function clone(data) {
-  return data.map(o => Object.assign({}, o));
 }
 
 if (require.main === module) {
